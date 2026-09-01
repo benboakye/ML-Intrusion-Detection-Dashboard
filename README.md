@@ -17,7 +17,7 @@ The final model is demonstrated through a Streamlit dashboard that performs cont
 
 ## Project status
 
-The repository is being initialized. Implementation, trained models, evaluation results, and dashboard screenshots will be added as the project progresses. No performance results are claimed until the complete reproducible evaluation has been run.
+Project foundation is in place. Dataset-dependent implementation, trained models, evaluation results, and dashboard screenshots will be added in verified stages. No performance results are claimed until the complete reproducible evaluation has been run.
 
 ## Aim
 
@@ -102,7 +102,7 @@ The implementation is designed for a computer with approximately 8 GB RAM and a 
 Windows PowerShell:
 
 ```powershell
-py -m venv .venv
+python -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
@@ -117,7 +117,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-`requirements.txt` will be added with the first implementation stage. A tested environment snapshot will be recorded in `environment-lock.txt`.
+The direct dependency contract is recorded in `requirements.txt`. After installation and verification, exact resolved versions are recorded in `environment-lock.txt`.
 
 ## Planned workflow
 

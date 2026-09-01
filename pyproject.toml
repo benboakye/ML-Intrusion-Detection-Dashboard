@@ -1,0 +1,13 @@
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = ["-ra", "--strict-config", "--strict-markers"]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true

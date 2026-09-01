@@ -1,0 +1,47 @@
+# Python environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Test, coverage, notebook, and tool caches
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Dataset files and generated replay inputs
+data/raw/**
+data/interim/**
+data/processed/**
+data/replay/**
+*.parquet
+*.pcap
+*.pcapng
+
+# Serialized models are executable, reproducible artifacts and are not committed
+*.joblib
+*.pkl
+*.pickle
+
+# Local run debris
+results/**/console.log
+results/**/profile-*.json
+replay_predictions*.csv
