@@ -61,6 +61,20 @@ Key controls include:
 
 Users must obtain the dataset from its official source and follow the current terms of use.
 
+After placing confirmed collection-day CSVs in the separate raw-data folders,
+generate the governed source manifest before preparation:
+
+```powershell
+python src/inspect_dataset.py `
+  --download-date YYYY-MM-DD `
+  --train-official-day "CONFIRMED TRAINING DAY" `
+  --test-official-day "CONFIRMED TESTING DAY"
+```
+
+See `docs/DATASET.md` for the acquisition, placement, hashing, and completion
+rules. The script scans only label columns and does not expose the external-test
+feature distributions.
+
 ## Planned repository structure
 
 ```text

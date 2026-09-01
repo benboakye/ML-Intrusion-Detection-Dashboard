@@ -32,6 +32,9 @@ data/raw/**
 data/interim/**
 data/processed/**
 data/replay/**
+data/**/*.zip
+data/**/*.7z
+data/**/*.gz
 *.parquet
 *.pcap
 *.pcapng
