@@ -80,7 +80,7 @@ if "replay_result" in st.session_state:
     st.subheader("Predicted class counts")
     st.bar_chart(counts)
     st.subheader("Recent alerts")
-    st.dataframe(result.loc[result["alert"]].tail(20), use_container_width=True)
+    st.dataframe(result.loc[result["alert"]].tail(20), width="stretch")
     st.download_button(
         "Download prediction log",
         result.to_csv(index=False),

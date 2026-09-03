@@ -14,3 +14,12 @@ Run from the repository root:
 ```powershell
 streamlit run dashboard/app.py
 ```
+
+Repository configuration disables Streamlit usage-statistics collection so the
+local demonstration does not require writes to a user-profile telemetry file.
+
+To create the immutable replay evidence bundle after generating the sample:
+
+```powershell
+python src/run_replay_evidence.py
+```

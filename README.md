@@ -184,6 +184,7 @@ python src/train_models.py
 pytest -q
 python src/evaluate_models.py
 python src/make_replay_sample.py
+python src/run_replay_evidence.py
 streamlit run dashboard/app.py
 ```
 
