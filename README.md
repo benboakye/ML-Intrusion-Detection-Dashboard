@@ -19,9 +19,11 @@ The final model is demonstrated through a Streamlit dashboard that performs cont
 
 Project foundation, governed dataset manifest, memory-bounded data preparation,
 training-only exploratory evidence, and the frozen 15-feature selection are in
-place. Trained models, evaluation results, and dashboard screenshots will be
-added in verified stages. No performance results are claimed until the complete
-reproducible evaluation has been run.
+place. The two fixed Random Forest conditions have passed a shared development
+validation split, been retrained on all training rows, and been frozen before
+external testing. Final evaluation results and dashboard screenshots will be
+added in verified stages. Development validation is not presented as final
+performance evidence.
 
 ## Aim
 

@@ -1,0 +1,68 @@
+{
+  "acceptance_margins": {
+    "maximum_macro_f1_loss": 0.01,
+    "maximum_syn_or_udp_recall_loss": 0.02
+  },
+  "class_counts": {
+    "BENIGN": 2549,
+    "SYN": 2549,
+    "UDP": 2549
+  },
+  "external_test_evaluated": false,
+  "freeze_date": "2026-09-03",
+  "full_feature_count": 64,
+  "model_hashes": {
+    "full": "b1b9901a2139b2606ce326d9b65ca8da6a9cba6164f426ac928892a669ccc948",
+    "reduced": "2751057dd3db755c5c0d7cf9fc4f46a24a797b933fcae313a8adec8c2d2a1576"
+  },
+  "random_forest_parameters": {
+    "bootstrap": true,
+    "class_weight": "balanced_subsample",
+    "max_depth": 20,
+    "max_features": "sqrt",
+    "max_samples": 0.7,
+    "min_samples_leaf": 2,
+    "n_estimators": 100,
+    "n_jobs": 2,
+    "random_state": 42
+  },
+  "reduced_feature_count": 15,
+  "reduced_features": [
+    "Avg Fwd Segment Size",
+    "Max Packet Length",
+    "Fwd Packet Length Mean",
+    "Packet Length Mean",
+    "Average Packet Size",
+    "Fwd Packet Length Max",
+    "Total Length of Fwd Packets",
+    "Subflow Fwd Bytes",
+    "Init_Win_bytes_forward",
+    "Flow Bytes/s",
+    "Fwd Packet Length Min",
+    "Min Packet Length",
+    "Flow Packets/s",
+    "Flow IAT Max",
+    "Flow IAT Mean"
+  ],
+  "training_sha256": "93b188e923633b01f1e40d29596b97f78147eabb51e0124052f6a1d9f0222c08",
+  "validation_metrics": {
+    "full": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "recall": {
+        "BENIGN": 1.0,
+        "SYN": 1.0,
+        "UDP": 1.0
+      }
+    },
+    "reduced": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "recall": {
+        "BENIGN": 1.0,
+        "SYN": 1.0,
+        "UDP": 1.0
+      }
+    }
+  }
+}

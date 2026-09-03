@@ -1,0 +1,32 @@
+{
+  "models": {
+    "full": {
+      "feature_count": 64,
+      "file": "full_rf.joblib",
+      "fit_seconds": 0.2264124999996966,
+      "sha256": "b1b9901a2139b2606ce326d9b65ca8da6a9cba6164f426ac928892a669ccc948",
+      "size_bytes": 152948
+    },
+    "reduced": {
+      "feature_count": 15,
+      "file": "reduced_rf.joblib",
+      "fit_seconds": 0.1885818000000654,
+      "sha256": "2751057dd3db755c5c0d7cf9fc4f46a24a797b933fcae313a8adec8c2d2a1576",
+      "size_bytes": 161780
+    }
+  },
+  "random_forest_parameters": {
+    "bootstrap": true,
+    "class_weight": "balanced_subsample",
+    "max_depth": 20,
+    "max_features": "sqrt",
+    "max_samples": 0.7,
+    "min_samples_leaf": 2,
+    "n_estimators": 100,
+    "n_jobs": 2,
+    "random_state": 42
+  },
+  "selected_features_sha256": "10b36d1d909ee3e596a6d41874742f04ec6058d610f074482b8b84806878fde4",
+  "training_file": "train.parquet",
+  "training_sha256": "93b188e923633b01f1e40d29596b97f78147eabb51e0124052f6a1d9f0222c08"
+}

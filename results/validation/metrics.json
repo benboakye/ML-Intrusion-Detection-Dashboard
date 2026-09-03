@@ -1,0 +1,88 @@
+{
+  "conditions": {
+    "full": {
+      "accuracy": 1.0,
+      "confusion_matrix": [
+        [
+          510,
+          0,
+          0
+        ],
+        [
+          0,
+          510,
+          0
+        ],
+        [
+          0,
+          0,
+          510
+        ]
+      ],
+      "feature_count": 64,
+      "fit_and_predict_seconds": 0.2550384999999551,
+      "macro_f1": 1.0,
+      "per_class": {
+        "BENIGN": {
+          "f1-score": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "SYN": {
+          "f1-score": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "UDP": {
+          "f1-score": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      }
+    },
+    "reduced": {
+      "accuracy": 1.0,
+      "confusion_matrix": [
+        [
+          510,
+          0,
+          0
+        ],
+        [
+          0,
+          510,
+          0
+        ],
+        [
+          0,
+          0,
+          510
+        ]
+      ],
+      "feature_count": 15,
+      "fit_and_predict_seconds": 0.21208729999989373,
+      "macro_f1": 1.0,
+      "per_class": {
+        "BENIGN": {
+          "f1-score": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "SYN": {
+          "f1-score": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "UDP": {
+          "f1-score": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      }
+    }
+  },
+  "development_rows": 6117,
+  "external_test_used": false,
+  "seed": 42,
+  "validation_rows": 1530
+}
