@@ -73,6 +73,22 @@ def test_missing_required_labels_are_reported_by_role(tmp_path: Path) -> None:
     assert missing == {"training": ("UDP",), "external_test": ("SYN",)}
 
 
+def test_training_udp_alias_is_explicit_and_raw_label_is_preserved(
+    tmp_path: Path,
+) -> None:
+    train, test = _partitions(tmp_path)
+    _write_csv(train.directory / "flows.csv", ["BENIGN", "SYN", "DrDoS_UDP"])
+    _write_csv(test.directory / "flows.csv", ["BENIGN", "SYN", "UDP", "MSSQL"])
+
+    records = build_manifest((train, test))
+
+    assert records[0].labels == "BENIGN;DRDOS_UDP;SYN"
+    assert records[0].effective_labels == "BENIGN;SYN;UDP"
+    assert records[1].labels == "BENIGN;MSSQL;SYN;UDP"
+    assert records[1].effective_labels == "BENIGN;SYN;UDP"
+    assert missing_required_labels(records) == {}
+
+
 def test_partitions_must_be_physically_separate(tmp_path: Path) -> None:
     acquired = date(2026, 9, 1)
     shared = tmp_path / "shared"

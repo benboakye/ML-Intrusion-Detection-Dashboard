@@ -1,0 +1,147 @@
+{
+  "acceptance": {
+    "attack_recall_loss": {
+      "SYN": 0.92955,
+      "UDP": 0.0002500000000000835
+    },
+    "checks": {
+      "at_least_one_efficiency_measure_improved": true,
+      "macro_f1_loss_within_margin": false,
+      "syn_recall_loss_within_margin": false,
+      "udp_recall_loss_within_margin": true
+    },
+    "efficiency_improvements": {
+      "median_latency": true,
+      "memory_delta": false,
+      "model_size": false,
+      "throughput": true
+    },
+    "macro_f1_loss": 0.42138503688181894,
+    "passed": false
+  },
+  "conditions": {
+    "full": {
+      "accuracy": 0.9761,
+      "benchmark": {
+        "maximum_rss_delta_bytes": 569344,
+        "median_flows_per_second": 572689.5793411013,
+        "median_seconds": 0.10476879999987432,
+        "p95_seconds": 0.1088793199997781,
+        "repetitions": 5
+      },
+      "confusion_matrix": [
+        [
+          19981,
+          19,
+          0
+        ],
+        [
+          1391,
+          18591,
+          18
+        ],
+        [
+          6,
+          0,
+          19994
+        ]
+      ],
+      "false_positive_rate": {
+        "BENIGN": 0.034925,
+        "SYN": 0.000475,
+        "UDP": 0.00045
+      },
+      "feature_count": 64,
+      "macro_f1": 0.9760646197643764,
+      "model_sha256": "b1b9901a2139b2606ce326d9b65ca8da6a9cba6164f426ac928892a669ccc948",
+      "model_size_bytes": 152948,
+      "per_class": {
+        "BENIGN": {
+          "f1-score": 0.9657789163323506,
+          "precision": 0.9346524464402657,
+          "recall": 0.99905
+        },
+        "SYN": {
+          "f1-score": 0.963014763014763,
+          "precision": 0.9989790435249866,
+          "recall": 0.92955
+        },
+        "UDP": {
+          "f1-score": 0.9994001799460162,
+          "precision": 0.9991005396761943,
+          "recall": 0.9997
+        }
+      }
+    },
+    "reduced": {
+      "accuracy": 0.665,
+      "benchmark": {
+        "maximum_rss_delta_bytes": 1781760,
+        "median_flows_per_second": 849546.6960382197,
+        "median_seconds": 0.07062590000032287,
+        "p95_seconds": 0.07109668000011879,
+        "repetitions": 5
+      },
+      "confusion_matrix": [
+        [
+          19911,
+          89,
+          0
+        ],
+        [
+          19982,
+          0,
+          18
+        ],
+        [
+          11,
+          0,
+          19989
+        ]
+      ],
+      "false_positive_rate": {
+        "BENIGN": 0.499825,
+        "SYN": 0.002225,
+        "UDP": 0.00045
+      },
+      "feature_count": 15,
+      "macro_f1": 0.5546795828825575,
+      "model_sha256": "2751057dd3db755c5c0d7cf9fc4f46a24a797b933fcae313a8adec8c2d2a1576",
+      "model_size_bytes": 161780,
+      "per_class": {
+        "BENIGN": {
+          "f1-score": 0.6647636217948718,
+          "precision": 0.4989725340817963,
+          "recall": 0.99555
+        },
+        "SYN": {
+          "f1-score": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "UDP": {
+          "f1-score": 0.9992751268528007,
+          "precision": 0.9991003148897886,
+          "recall": 0.99945
+        }
+      }
+    }
+  },
+  "environment": {
+    "logical_cpu_count": 16,
+    "physical_cpu_count": 8,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "total_memory_bytes": 33456447488
+  },
+  "external_test_file": "external_test.parquet",
+  "external_test_rows": 60000,
+  "external_test_sha256": "0528c5a4922cbc95659827b421c6bc381439747030d7d107e904f3d5af3cb5f3",
+  "freeze_sha256": "822ae544b628620050c80b570401e659cc314ce63ad21f7c83b437e3cd4f798b",
+  "labels": [
+    "BENIGN",
+    "SYN",
+    "UDP"
+  ],
+  "model_manifest_sha256": "14698b627d2dd1a87b88343bcb23fbcf20a5f4e07f6f324ff5f5c451a92a3d7e"
+}

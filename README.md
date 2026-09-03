@@ -17,7 +17,12 @@ The final model is demonstrated through a Streamlit dashboard that performs cont
 
 ## Project status
 
-Project foundation is in place. Dataset-dependent implementation, trained models, evaluation results, and dashboard screenshots will be added in verified stages. No performance results are claimed until the complete reproducible evaluation has been run.
+The governed data pipeline, training-only feature selection, frozen model
+comparison, one-time external evaluation, replay-sample generator, and
+controlled-replay dashboard are implemented. The full model met the quality
+targets; the frozen 15-feature model did not. The dashboard preserves that
+negative result in a permanent warning and is limited to prepared CSV replay.
+Development validation is not presented as final performance evidence.
 
 ## Aim
 
@@ -45,6 +50,23 @@ The input feature set is the independent condition. The algorithm, hyperparamete
 
 The primary quality measure is macro F1-score. Per-class recall, confusion matrices, false-positive rates, prediction latency, throughput, memory change, and stored model size are also measured.
 
+## Frozen external-test result
+
+The single hash-gated external evaluation used 60,000 balanced records from the
+independent 2019-03-11 collection day (20,000 per class).
+
+| Condition | Features | Accuracy | Macro F1 | BENIGN recall | SYN recall | UDP recall | Median time | Throughput |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Full | 64 | 0.9761 | 0.9761 | 0.9991 | 0.9295 | 0.9997 | 0.1048 s | 572,690 flows/s |
+| Reduced | 15 | 0.6650 | 0.5547 | 0.9956 | 0.0000 | 0.9994 | 0.0706 s | 849,547 flows/s |
+
+The reduced condition improved median latency and throughput, but its macro-F1
+loss was 0.4214 and its SYN-recall loss was 0.9295. It therefore failed the
+predeclared quality margins and must not be represented as an adequate SYN/UDP
+detector. This negative result is retained without post-test feature reselection
+or tuning. Complete metrics and all timing repetitions are under
+`results/final_external_test/`.
+
 ## Data and leakage controls
 
 The project uses the flow CSV files from the [CIC-DDoS2019 dataset](https://www.unb.ca/cic/datasets/ddos-2019.html). Raw data is not committed to this repository.
@@ -55,7 +77,9 @@ Key controls include:
 - Fit imputation, feature selection, and models using training-day data only.
 - Use the testing day once for the frozen final comparison.
 - Remove identifiers and shortcut fields before modelling, including flow IDs, IP addresses, timestamps, ports, and protocol.
-- Use exact `BENIGN`, `SYN`, and `UDP` labels; do not merge similarly named attacks.
+- Use `BENIGN`, `SYN`, and `UDP` as the effective targets. The verified training
+  label `DRDOS_UDP` is mapped explicitly to `UDP`; raw provenance remains in the
+  manifest. Do not merge any other similarly named attack, including UDP-Lag.
 - Use `random_state=42` for reproducible random operations.
 - Record source-file and model-artifact SHA-256 hashes.
 
@@ -75,7 +99,20 @@ See `docs/DATASET.md` for the acquisition, placement, hashing, and completion
 rules. The script scans only label columns and does not expose the external-test
 feature distributions.
 
-## Planned repository structure
+Prepare the bounded, balanced modelling datasets after the manifest gate passes:
+
+```powershell
+python src/prepare_data.py
+```
+
+This scans CSVs in 50,000-row chunks, retains a seeded uniform sample with
+maximums of 50,000 rows per training class and 20,000 per external-test class,
+balances each role down to its smallest available target class without row
+duplication, removes
+identifier and shortcut fields, keeps shared training-varying numeric features,
+and writes ignored Parquet data plus committed JSON audit metadata.
+
+## Repository structure
 
 ```text
 ML-Intrusion-Detection-Dashboard/
@@ -105,7 +142,9 @@ ML-Intrusion-Detection-Dashboard/
 `-- requirements.txt
 ```
 
-The structure above describes the intended implementation. Directories and files will be added in tested stages.
+Raw, processed, and replay data remain local and are excluded from Git. Model
+files also remain local; their names and SHA-256 hashes are recorded in the
+committed artifact manifests.
 
 ## Target environment
 
@@ -133,9 +172,9 @@ pip install -r requirements.txt
 
 The direct dependency contract is recorded in `requirements.txt`. After installation and verification, exact resolved versions are recorded in `environment-lock.txt`.
 
-## Planned workflow
+## Reproducible workflow
 
-After the implementation files are available, the reproducible workflow will be:
+From a prepared environment, run:
 
 ```powershell
 python src/prepare_data.py
@@ -145,6 +184,7 @@ python src/train_models.py
 pytest -q
 python src/evaluate_models.py
 python src/make_replay_sample.py
+python src/run_replay_evidence.py
 streamlit run dashboard/app.py
 ```
 
@@ -152,7 +192,7 @@ Every important run should write to a new dated results directory. Results used 
 
 ## Dashboard scope
 
-The Streamlit interface will:
+The Streamlit interface:
 
 - Load a fixed, trusted reduced-feature model artifact.
 - Accept prepared flow-record CSV files, not model uploads.
@@ -176,7 +216,7 @@ Python `joblib` artifacts can execute code while loading. Only locally produced,
 
 ## Reproducibility and evidence
 
-The project will retain:
+The project retains:
 
 - Dataset manifests and source-file hashes.
 - Package versions and fixed configuration values.
@@ -188,6 +228,12 @@ The project will retain:
 - Automated and functional test records.
 - Dashboard screenshots and downloaded replay logs.
 - Known limitations and any failed acceptance criteria.
+
+## Author
+
+- Bernard Boakye Appiah
+- Student, Humber College, Canada
+- N10036999@humber.ca
 
 ## Limitations
 

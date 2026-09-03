@@ -1,0 +1,16 @@
+{
+  "alert_count": 502,
+  "batch_size": 1000,
+  "elapsed_seconds": 0.06248479999976553,
+  "flows_per_second": 24005.83821994515,
+  "input_sha256": "276666066d9b19dc72f4fcdf9902341c6de6db3c16d55659e69551e4b3408698",
+  "model_condition": "reduced",
+  "model_training_sha256": "93b188e923633b01f1e40d29596b97f78147eabb51e0124052f6a1d9f0222c08",
+  "prediction_counts": {
+    "BENIGN": 998,
+    "SYN": 2,
+    "UDP": 500
+  },
+  "predictions_sha256": "171d1d9a39e44ab9d577f25396ec9e5876cf0d02602677daa18c9a03c0d2f4d2",
+  "rows": 1500
+}

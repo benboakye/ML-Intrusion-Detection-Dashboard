@@ -1,0 +1,22 @@
+{
+  "class_counts": {
+    "BENIGN": 500,
+    "SYN": 500,
+    "UDP": 500
+  },
+  "external_test_sha256": "0528c5a4922cbc95659827b421c6bc381439747030d7d107e904f3d5af3cb5f3",
+  "input": {
+    "contains_label": false,
+    "file": "replay_input.csv",
+    "sha256": "276666066d9b19dc72f4fcdf9902341c6de6db3c16d55659e69551e4b3408698",
+    "size_bytes": 506219
+  },
+  "rows": 1500,
+  "rows_per_class_maximum": 500,
+  "seed": 42,
+  "truth": {
+    "file": "replay_truth.csv",
+    "sha256": "f1507d2ac898eee69b0745a35ae319d431f874c212f8117d2f90d0c40167b263",
+    "size_bytes": 15413
+  }
+}

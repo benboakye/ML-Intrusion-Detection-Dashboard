@@ -1,0 +1,81 @@
+{
+  "chunk_size": 50000,
+  "external_test": {
+    "applied_class_size": 20000,
+    "effective_target_counts": {
+      "BENIGN": 38924,
+      "SYN": 4284751,
+      "UDP": 3754680
+    },
+    "excluded_source_counts": {
+      "MSSQL": 24392
+    },
+    "requested_class_cap": 20000,
+    "selected_class_counts": {
+      "BENIGN": 20000,
+      "SYN": 20000,
+      "UDP": 20000
+    },
+    "selected_rows": 60000,
+    "source_label_counts": {
+      "BENIGN": 38924,
+      "MSSQL": 24392,
+      "SYN": 4284751,
+      "UDP": 3754680
+    }
+  },
+  "forbidden_features_removed": [
+    "Destination IP",
+    "Destination Port",
+    "Flow ID",
+    "Fwd Header Length.1",
+    "Inbound",
+    "Protocol",
+    "SimillarHTTP",
+    "Source IP",
+    "Source Port",
+    "Timestamp",
+    "Unnamed: 0"
+  ],
+  "label_policy": {
+    "external_test": {},
+    "training": {
+      "DRDOS_UDP": "UDP"
+    }
+  },
+  "outputs": {
+    "external_test": {
+      "file": "external_test.parquet",
+      "sha256": "0528c5a4922cbc95659827b421c6bc381439747030d7d107e904f3d5af3cb5f3",
+      "size_bytes": 5351968
+    },
+    "training": {
+      "file": "train.parquet",
+      "sha256": "93b188e923633b01f1e40d29596b97f78147eabb51e0124052f6a1d9f0222c08",
+      "size_bytes": 714119
+    }
+  },
+  "seed": 42,
+  "training": {
+    "applied_class_size": 2549,
+    "effective_target_counts": {
+      "BENIGN": 2549,
+      "SYN": 1582289,
+      "UDP": 3134645
+    },
+    "excluded_source_counts": {},
+    "requested_class_cap": 50000,
+    "selected_class_counts": {
+      "BENIGN": 2549,
+      "SYN": 2549,
+      "UDP": 2549
+    },
+    "selected_rows": 7647,
+    "source_label_counts": {
+      "BENIGN": 2549,
+      "DRDOS_UDP": 3134645,
+      "SYN": 1582289
+    }
+  },
+  "usable_feature_count": 64
+}

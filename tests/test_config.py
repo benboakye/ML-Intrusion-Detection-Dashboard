@@ -4,6 +4,7 @@ from ml_nids.config import (
     EXTERNAL_TEST_CLASS_CAP,
     FEATURE_RANKING_CLASS_CAP,
     FORBIDDEN_FEATURES,
+    LABEL_ALIASES_BY_ROLE,
     MAX_ATTACK_RECALL_LOSS,
     MAX_MACRO_F1_LOSS,
     PROJECT_ROOT,
@@ -30,6 +31,8 @@ def test_fixed_experiment_decisions() -> None:
     assert BENCHMARK_REPETITIONS == 5
     assert MAX_MACRO_F1_LOSS == 0.01
     assert MAX_ATTACK_RECALL_LOSS == 0.02
+    assert dict(LABEL_ALIASES_BY_ROLE["training"]) == {"DRDOS_UDP": "UDP"}
+    assert dict(LABEL_ALIASES_BY_ROLE["external_test"]) == {}
 
 
 def test_shortcut_and_identifier_fields_are_forbidden() -> None:
@@ -41,6 +44,8 @@ def test_shortcut_and_identifier_fields_are_forbidden() -> None:
         "Source Port",
         "Destination Port",
         "Protocol",
+        "Unnamed: 0",
+        "Fwd Header Length.1",
     }
     assert expected <= FORBIDDEN_FEATURES
 
