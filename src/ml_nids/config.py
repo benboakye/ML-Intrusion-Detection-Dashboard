@@ -74,6 +74,8 @@ PRIMARY_METRIC: Final = "macro_f1"
 MAX_MACRO_F1_LOSS: Final = 0.01
 MAX_ATTACK_RECALL_LOSS: Final = 0.02
 BENCHMARK_REPETITIONS: Final = 5
+DASHBOARD_MAX_ROWS: Final = 10_000
+REPLAY_ROWS_PER_CLASS: Final = 500
 
 
 def required_directories() -> tuple[Path, ...]:

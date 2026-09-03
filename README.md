@@ -17,11 +17,11 @@ The final model is demonstrated through a Streamlit dashboard that performs cont
 
 ## Project status
 
-Project foundation, governed dataset manifest, memory-bounded data preparation,
-training-only exploratory evidence, and the frozen 15-feature selection are in
-place. The two fixed Random Forest conditions were frozen and evaluated once on
-the independent testing day. The full model met the quality targets; the frozen
-15-feature model did not. Dashboard implementation and screenshots remain.
+The governed data pipeline, training-only feature selection, frozen model
+comparison, one-time external evaluation, replay-sample generator, and
+controlled-replay dashboard are implemented. The full model met the quality
+targets; the frozen 15-feature model did not. The dashboard preserves that
+negative result in a permanent warning and is limited to prepared CSV replay.
 Development validation is not presented as final performance evidence.
 
 ## Aim
@@ -112,7 +112,7 @@ duplication, removes
 identifier and shortcut fields, keeps shared training-varying numeric features,
 and writes ignored Parquet data plus committed JSON audit metadata.
 
-## Planned repository structure
+## Repository structure
 
 ```text
 ML-Intrusion-Detection-Dashboard/
@@ -142,7 +142,9 @@ ML-Intrusion-Detection-Dashboard/
 `-- requirements.txt
 ```
 
-The structure above describes the intended implementation. Directories and files will be added in tested stages.
+Raw, processed, and replay data remain local and are excluded from Git. Model
+files also remain local; their names and SHA-256 hashes are recorded in the
+committed artifact manifests.
 
 ## Target environment
 
@@ -170,9 +172,9 @@ pip install -r requirements.txt
 
 The direct dependency contract is recorded in `requirements.txt`. After installation and verification, exact resolved versions are recorded in `environment-lock.txt`.
 
-## Planned workflow
+## Reproducible workflow
 
-After the implementation files are available, the reproducible workflow will be:
+From a prepared environment, run:
 
 ```powershell
 python src/prepare_data.py
@@ -189,7 +191,7 @@ Every important run should write to a new dated results directory. Results used 
 
 ## Dashboard scope
 
-The Streamlit interface will:
+The Streamlit interface:
 
 - Load a fixed, trusted reduced-feature model artifact.
 - Accept prepared flow-record CSV files, not model uploads.
@@ -213,7 +215,7 @@ Python `joblib` artifacts can execute code while loading. Only locally produced,
 
 ## Reproducibility and evidence
 
-The project will retain:
+The project retains:
 
 - Dataset manifests and source-file hashes.
 - Package versions and fixed configuration values.
@@ -225,6 +227,12 @@ The project will retain:
 - Automated and functional test records.
 - Dashboard screenshots and downloaded replay logs.
 - Known limitations and any failed acceptance criteria.
+
+## Author
+
+- Bernard Boakye Appiah
+- Student, Humber College, Canada
+- N10036999@humber.ca
 
 ## Limitations
 
