@@ -7,7 +7,6 @@ import json
 import os
 import platform
 import sys
-import tempfile
 import time
 from pathlib import Path
 from typing import Any
@@ -250,6 +249,12 @@ def _write_outputs(
             for timing in timings[condition]:
                 writer.writerow({"condition": condition, **timing})
 
+    write_confusion_plots(record, output_dir)
+
+
+def write_confusion_plots(record: dict[str, Any], output_dir: Path) -> None:
+    """Render legible confusion matrices from an existing evaluation record."""
+
     os.environ.setdefault(
         "MPLCONFIGDIR", str(PROJECT_ROOT / "data" / "interim" / "matplotlib")
     )
@@ -260,7 +265,7 @@ def _write_outputs(
 
     for condition in ("full", "reduced"):
         matrix = np.array(record["conditions"][condition]["confusion_matrix"])
-        figure, axis = plt.subplots(figsize=(5.2, 4.4))
+        figure, axis = plt.subplots(figsize=(6.4, 5.2))
         image = axis.imshow(matrix, cmap="Greys")
         axis.set(
             title=f"{condition.title()} Random Forest",
@@ -283,7 +288,7 @@ def _write_outputs(
                     color="white" if matrix[row, column] > threshold else "black",
                 )
         figure.colorbar(image, ax=axis, fraction=0.046, pad=0.04)
-        figure.tight_layout()
+        figure.subplots_adjust(left=0.20, right=0.87, bottom=0.16, top=0.86)
         figure.savefig(output_dir / f"confusion_{condition}.png", dpi=200)
         plt.close(figure)
 
@@ -354,10 +359,11 @@ def evaluate_frozen_models(
     }
 
     output_dir.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(
-        prefix=f"{output_dir.name}-", dir=output_dir.parent
-    ) as temporary:
-        temporary_output = Path(temporary) / output_dir.name
-        _write_outputs(temporary_output, record, timings)
-        os.replace(temporary_output, output_dir)
+    staging_output = output_dir.with_name(f".{output_dir.name}.partial")
+    if staging_output.exists():
+        raise DataPreparationError(
+            f"Staging output already exists; inspect it before retrying: {staging_output}"
+        )
+    _write_outputs(staging_output, record, timings)
+    os.replace(staging_output, output_dir)
     return record

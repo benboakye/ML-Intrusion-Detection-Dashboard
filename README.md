@@ -19,11 +19,10 @@ The final model is demonstrated through a Streamlit dashboard that performs cont
 
 Project foundation, governed dataset manifest, memory-bounded data preparation,
 training-only exploratory evidence, and the frozen 15-feature selection are in
-place. The two fixed Random Forest conditions have passed a shared development
-validation split, been retrained on all training rows, and been frozen before
-external testing. Final evaluation results and dashboard screenshots will be
-added in verified stages. Development validation is not presented as final
-performance evidence.
+place. The two fixed Random Forest conditions were frozen and evaluated once on
+the independent testing day. The full model met the quality targets; the frozen
+15-feature model did not. Dashboard implementation and screenshots remain.
+Development validation is not presented as final performance evidence.
 
 ## Aim
 
@@ -50,6 +49,23 @@ The input feature set is the independent condition. The algorithm, hyperparamete
 | Input features | All usable numeric features | Top 15 training-derived features |
 
 The primary quality measure is macro F1-score. Per-class recall, confusion matrices, false-positive rates, prediction latency, throughput, memory change, and stored model size are also measured.
+
+## Frozen external-test result
+
+The single hash-gated external evaluation used 60,000 balanced records from the
+independent 2019-03-11 collection day (20,000 per class).
+
+| Condition | Features | Accuracy | Macro F1 | BENIGN recall | SYN recall | UDP recall | Median time | Throughput |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Full | 64 | 0.9761 | 0.9761 | 0.9991 | 0.9295 | 0.9997 | 0.1048 s | 572,690 flows/s |
+| Reduced | 15 | 0.6650 | 0.5547 | 0.9956 | 0.0000 | 0.9994 | 0.0706 s | 849,547 flows/s |
+
+The reduced condition improved median latency and throughput, but its macro-F1
+loss was 0.4214 and its SYN-recall loss was 0.9295. It therefore failed the
+predeclared quality margins and must not be represented as an adequate SYN/UDP
+detector. This negative result is retained without post-test feature reselection
+or tuning. Complete metrics and all timing repetitions are under
+`results/final_external_test/`.
 
 ## Data and leakage controls
 
