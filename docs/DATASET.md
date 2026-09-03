@@ -36,15 +36,31 @@ python src/inspect_dataset.py `
   --test-official-day "CONFIRMED TESTING DAY"
 ```
 
-The command scans only the label column, counts rows, records normalized label
-values, calculates SHA-256 for every CSV, and writes
+The command scans only the label column, counts rows, records raw normalized
+labels and governed effective labels, calculates SHA-256 for every CSV, and writes
 `docs/dataset_manifest.csv`. It returns a non-zero status if either partition
-does not contain all three required labels: `BENIGN`, `SYN`, and `UDP`.
+cannot provide all three effective labels: `BENIGN`, `SYN`, and `UDP`.
+
+### Verified label policy
+
+The official 2019-01-12 training archive labels its UDP reflection-flood rows
+`DrDoS_UDP`; the 2019-03-11 archive uses `UDP`. The preparation boundary applies
+one explicit training-only mapping, `DRDOS_UDP -> UDP`, so the same three-class
+target can be evaluated across collection days. The manifest retains
+`DRDOS_UDP` in `labels` and records `UDP` in `effective_labels`.
+
+No other attack is merged. In particular, `UDP-Lag`, `MSSQL`, and all labels
+outside `BENIGN`, `SYN`, and the single governed alias are excluded.
+
+The preparation policy also removes the CSV export index `Unnamed: 0` and the
+pandas-mangled duplicate `Fwd Header Length.1`, in addition to identifiers,
+ports, timestamps, protocol, and other frozen shortcut fields.
 
 ## Completion gate
 
 - The official source and download date are recorded.
 - Training and external-test folders are physically separate.
 - Every CSV has a SHA-256 hash, row count, role, collection day, and label list.
-- Exact `BENIGN`, `SYN`, and `UDP` labels are observed in both roles.
+- Effective `BENIGN`, `SYN`, and `UDP` labels are available in both roles, with
+  every alias documented and raw labels retained in the manifest.
 - No raw data, archive, PCAP, or serialized model is staged in Git.

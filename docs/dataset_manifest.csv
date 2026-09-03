@@ -1,0 +1,5 @@
+dataset,official_source,download_date,official_day,role,local_file,size_bytes,row_count,labels,effective_labels,sha256
+CIC-DDoS2019,https://www.unb.ca/cic/datasets/ddos-2019.html,2026-09-01,2019-01-12,training,DrDoS_UDP.csv,1506039371,3136802,BENIGN;DRDOS_UDP,BENIGN;UDP,85c54bf54f987586e1d8da14b76d1167baa4636755cae24e648067e5242d679a
+CIC-DDoS2019,https://www.unb.ca/cic/datasets/ddos-2019.html,2026-09-01,2019-01-12,training,Syn.csv,637312127,1582681,BENIGN;SYN,BENIGN;SYN,05a272a7005be14262d3929ad16877db42fc74a03032a3a5b58d0230ab08896a
+CIC-DDoS2019,https://www.unb.ca/cic/datasets/ddos-2019.html,2026-09-01,2019-03-11,external_test,Syn.csv,1877372065,4320541,BENIGN;SYN,BENIGN;SYN,603648e7c56e9232b6d647470dc01b6451502c594a4ebf235b45103edb5e545a
+CIC-DDoS2019,https://www.unb.ca/cic/datasets/ddos-2019.html,2026-09-01,2019-03-11,external_test,UDP.csv,1792797298,3782206,BENIGN;MSSQL;UDP,BENIGN;UDP,27e262e851f12a5fc29cd433fec53a63e9e8fc3cfdc1a1d78f77995bd175a59b

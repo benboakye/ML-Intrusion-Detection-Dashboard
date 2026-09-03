@@ -17,7 +17,10 @@ The final model is demonstrated through a Streamlit dashboard that performs cont
 
 ## Project status
 
-Project foundation is in place. Dataset-dependent implementation, trained models, evaluation results, and dashboard screenshots will be added in verified stages. No performance results are claimed until the complete reproducible evaluation has been run.
+Project foundation, governed dataset manifest, and memory-bounded data
+preparation are in place. Feature analysis, trained models, evaluation results,
+and dashboard screenshots will be added in verified stages. No performance
+results are claimed until the complete reproducible evaluation has been run.
 
 ## Aim
 
@@ -55,7 +58,9 @@ Key controls include:
 - Fit imputation, feature selection, and models using training-day data only.
 - Use the testing day once for the frozen final comparison.
 - Remove identifiers and shortcut fields before modelling, including flow IDs, IP addresses, timestamps, ports, and protocol.
-- Use exact `BENIGN`, `SYN`, and `UDP` labels; do not merge similarly named attacks.
+- Use `BENIGN`, `SYN`, and `UDP` as the effective targets. The verified training
+  label `DRDOS_UDP` is mapped explicitly to `UDP`; raw provenance remains in the
+  manifest. Do not merge any other similarly named attack, including UDP-Lag.
 - Use `random_state=42` for reproducible random operations.
 - Record source-file and model-artifact SHA-256 hashes.
 
@@ -74,6 +79,19 @@ python src/inspect_dataset.py `
 See `docs/DATASET.md` for the acquisition, placement, hashing, and completion
 rules. The script scans only label columns and does not expose the external-test
 feature distributions.
+
+Prepare the bounded, balanced modelling datasets after the manifest gate passes:
+
+```powershell
+python src/prepare_data.py
+```
+
+This scans CSVs in 50,000-row chunks, retains a seeded uniform sample with
+maximums of 50,000 rows per training class and 20,000 per external-test class,
+balances each role down to its smallest available target class without row
+duplication, removes
+identifier and shortcut fields, keeps shared training-varying numeric features,
+and writes ignored Parquet data plus committed JSON audit metadata.
 
 ## Planned repository structure
 

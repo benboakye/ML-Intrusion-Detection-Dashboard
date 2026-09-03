@@ -22,6 +22,17 @@ SEED: Final = 42
 LABEL_COLUMN: Final = "Label"
 TARGET_LABELS: Final = ("BENIGN", "SYN", "UDP")
 
+# The official 2019-01-12 archive names its UDP reflection-flood class
+# ``DrDoS_UDP`` while the independent 2019-03-11 archive uses ``UDP``.
+# This single role-scoped mapping is recorded explicitly so provenance is not
+# lost and similarly named attacks (for example UDP-lag) are never merged.
+LABEL_ALIASES_BY_ROLE: Final = MappingProxyType(
+    {
+        "training": MappingProxyType({"DRDOS_UDP": "UDP"}),
+        "external_test": MappingProxyType({}),
+    }
+)
+
 CSV_CHUNK_SIZE: Final = 50_000
 TRAIN_CLASS_CAP: Final = 50_000
 EXTERNAL_TEST_CLASS_CAP: Final = 20_000
@@ -39,6 +50,9 @@ FORBIDDEN_FEATURES: Final = frozenset(
         "Protocol",
         "SimillarHTTP",
         "Inbound",
+        # CIC-DDoS2019 CSV export/index and a pandas-mangled duplicate header.
+        "Unnamed: 0",
+        "Fwd Header Length.1",
     }
 )
 

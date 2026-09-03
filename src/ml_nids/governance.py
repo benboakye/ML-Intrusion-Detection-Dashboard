@@ -14,6 +14,7 @@ from typing import Final, Iterable, Sequence
 import pandas as pd
 
 from ml_nids.config import CSV_CHUNK_SIZE, LABEL_COLUMN, TARGET_LABELS
+from ml_nids.labels import effective_target_labels
 
 DATASET_NAME: Final = "CIC-DDoS2019"
 OFFICIAL_SOURCE_URL: Final = "https://www.unb.ca/cic/datasets/ddos-2019.html"
@@ -27,6 +28,7 @@ MANIFEST_FIELDS: Final = (
     "size_bytes",
     "row_count",
     "labels",
+    "effective_labels",
     "sha256",
 )
 
@@ -62,6 +64,7 @@ class ManifestRecord:
     size_bytes: int
     row_count: int
     labels: str
+    effective_labels: str
     sha256: str
 
 
@@ -133,6 +136,7 @@ def inspect_partition(partition: DatasetPartition) -> list[ManifestRecord]:
     records: list[ManifestRecord] = []
     for path in discover_csv_files(partition.directory):
         row_count, labels = scan_labels(path)
+        effective_labels = effective_target_labels(labels, partition.role)
         records.append(
             ManifestRecord(
                 dataset=DATASET_NAME,
@@ -144,6 +148,7 @@ def inspect_partition(partition: DatasetPartition) -> list[ManifestRecord]:
                 size_bytes=path.stat().st_size,
                 row_count=row_count,
                 labels=";".join(labels),
+                effective_labels=";".join(effective_labels),
                 sha256=sha256_file(path),
             )
         )
@@ -176,7 +181,9 @@ def missing_required_labels(
 
     labels_by_role = {"training": set(), "external_test": set()}
     for record in records:
-        labels_by_role[record.role].update(filter(None, record.labels.split(";")))
+        labels_by_role[record.role].update(
+            filter(None, record.effective_labels.split(";"))
+        )
     required = set(TARGET_LABELS)
     return {
         role: tuple(sorted(required - observed))
