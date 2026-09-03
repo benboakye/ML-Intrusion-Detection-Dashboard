@@ -1,0 +1,17 @@
+[
+  "Avg Fwd Segment Size",
+  "Max Packet Length",
+  "Fwd Packet Length Mean",
+  "Packet Length Mean",
+  "Average Packet Size",
+  "Fwd Packet Length Max",
+  "Total Length of Fwd Packets",
+  "Subflow Fwd Bytes",
+  "Init_Win_bytes_forward",
+  "Flow Bytes/s",
+  "Fwd Packet Length Min",
+  "Min Packet Length",
+  "Flow Packets/s",
+  "Flow IAT Max",
+  "Flow IAT Mean"
+]

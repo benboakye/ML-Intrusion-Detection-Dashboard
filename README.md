@@ -17,10 +17,11 @@ The final model is demonstrated through a Streamlit dashboard that performs cont
 
 ## Project status
 
-Project foundation, governed dataset manifest, and memory-bounded data
-preparation are in place. Feature analysis, trained models, evaluation results,
-and dashboard screenshots will be added in verified stages. No performance
-results are claimed until the complete reproducible evaluation has been run.
+Project foundation, governed dataset manifest, memory-bounded data preparation,
+training-only exploratory evidence, and the frozen 15-feature selection are in
+place. Trained models, evaluation results, and dashboard screenshots will be
+added in verified stages. No performance results are claimed until the complete
+reproducible evaluation has been run.
 
 ## Aim
 

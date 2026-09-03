@@ -1,0 +1,15 @@
+{
+  "external_test_used": false,
+  "input_feature_count": 64,
+  "method": "mutual_info_classif",
+  "sample_cap_per_class": 10000,
+  "sampled_class_counts": {
+    "BENIGN": 2549,
+    "SYN": 2549,
+    "UDP": 2549
+  },
+  "seed": 42,
+  "selected_feature_count": 15,
+  "training_file": "train.parquet",
+  "training_sha256": "93b188e923633b01f1e40d29596b97f78147eabb51e0124052f6a1d9f0222c08"
+}
